@@ -7,8 +7,11 @@ import type {
   PaletteGenerator,
   AppState,
   Subscriber,
+  ThemePreference,
 } from './types'
 import { OUTPUT_SPACE_MAP } from './config'
+
+const THEME_STORAGE_KEY = 'colorPaletteThemePreference'
 
 // Dynamically import all palette generators
 const generatorModules = import.meta.glob<{
@@ -51,14 +54,23 @@ class StateManager {
       }
     }
 
+    // Load theme preference from local storage or default to 'system'
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemePreference | null
+    const themePreference: ThemePreference = 
+      savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system'
+        ? savedTheme
+        : 'system'
+
     this.state = {
       baseColor: new Color('oklch', [0.7, 0.14, 190]),
       colorMode: 'oklch',
       outputSpace: 'srgb',
       exportFormat: 'json',
       paletteMap: new Map(),
+      themePreference,
     }
     this.generatePalette()
+    this.applyTheme()
   }
 
   subscribe(callback: Subscriber): () => void {
@@ -104,8 +116,27 @@ class StateManager {
     this.notify()
   }
 
+  setThemePreference(preference: ThemePreference) {
+    this.state.themePreference = preference
+    localStorage.setItem(THEME_STORAGE_KEY, preference)
+    this.applyTheme()
+    this.notify()
+  }
+
   getPaletteGeneratorName(id: string): string {
     return this.paletteGeneratorLookup.get(id) || id
+  }
+
+  private applyTheme() {
+    const { themePreference } = this.state
+    
+    if (themePreference === 'system') {
+      // Remove the color-scheme override to let the browser use system preference
+      document.documentElement.style.colorScheme = ''
+    } else {
+      // Set explicit color-scheme
+      document.documentElement.style.colorScheme = themePreference
+    }
   }
 
   private generatePalette() {

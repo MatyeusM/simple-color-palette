@@ -5,6 +5,7 @@ import type Color from 'colorjs.io'
 export type ColorMode = 'rgb' | 'hsl' | 'oklch'
 export type OutputSpace = 'srgb' | 'p3' | 'rec2020'
 export type ExportFormat = 'json' | 'markdown'
+export type ThemePreference = 'light' | 'dark' | 'system'
 
 export interface PaletteColor {
   color: Color
@@ -24,6 +25,7 @@ export interface AppState {
   outputSpace: OutputSpace
   exportFormat: ExportFormat
   paletteMap: Map<string, PaletteColor[]>
+  themePreference: ThemePreference
 }
 
 export type Subscriber = (state: AppState) => void

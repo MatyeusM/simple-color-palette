@@ -1,4 +1,7 @@
 :root {
+  /* Enable automatic color scheme switching */
+  color-scheme: light dark;
+
   /* Design tokens */
   --hue: 190;
   --chroma-grayscale: 0.01;
@@ -10,37 +13,97 @@
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
 
-  /* Shadows */
-  --shadow-base: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  /* Shadows - lighter in light mode, darker in dark mode */
+  --shadow-base: light-dark(
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 4px 20px rgba(0, 0, 0, 0.3)
+  );
+  --shadow-inset: light-dark(
+    inset 0 2px 4px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3)
+  );
 
-  /* Grayscale - Dark to Light */
-  --color-bg-darkest: oklch(0.05 var(--chroma-grayscale) var(--hue));
-  --color-bg-darker: oklch(0.08 var(--chroma-grayscale) var(--hue));
-  --color-bg-dark: oklch(0.1 var(--chroma-grayscale) var(--hue));
-  --color-bg-base: oklch(0.12 var(--chroma-grayscale) var(--hue));
+  /* Grayscale - Light mode (high lightness) to Dark mode (low lightness) */
+  --color-bg-darkest: light-dark(
+    oklch(0.98 var(--chroma-grayscale) var(--hue)),
+    oklch(0.05 var(--chroma-grayscale) var(--hue))
+  );
+  --color-bg-darker: light-dark(
+    oklch(0.96 var(--chroma-grayscale) var(--hue)),
+    oklch(0.08 var(--chroma-grayscale) var(--hue))
+  );
+  --color-bg-dark: light-dark(
+    oklch(0.94 var(--chroma-grayscale) var(--hue)),
+    oklch(0.1 var(--chroma-grayscale) var(--hue))
+  );
+  --color-bg-base: light-dark(
+    oklch(0.92 var(--chroma-grayscale) var(--hue)),
+    oklch(0.12 var(--chroma-grayscale) var(--hue))
+  );
 
   /* Border colors */
-  --color-border-base: oklch(0.2 var(--chroma-grayscale) var(--hue));
-  --color-border-medium: oklch(0.3 var(--chroma-grayscale) var(--hue));
-  --color-border-accent: oklch(0.5 var(--chroma-grayscale) var(--hue));
+  --color-border-base: light-dark(
+    oklch(0.8 var(--chroma-grayscale) var(--hue)),
+    oklch(0.2 var(--chroma-grayscale) var(--hue))
+  );
+  --color-border-medium: light-dark(
+    oklch(0.7 var(--chroma-grayscale) var(--hue)),
+    oklch(0.3 var(--chroma-grayscale) var(--hue))
+  );
+  --color-border-accent: light-dark(
+    oklch(0.5 var(--chroma-grayscale) var(--hue)),
+    oklch(0.5 var(--chroma-grayscale) var(--hue))
+  );
 
-  /* Text colors */
-  --color-text-muted: oklch(0.6 var(--chroma-grayscale) var(--hue));
-  --color-text-secondary: oklch(0.7 var(--chroma-grayscale) var(--hue));
-  --color-text-primary: oklch(0.8 var(--chroma-grayscale) var(--hue));
-  --color-text-bright: oklch(0.95 var(--chroma-grayscale) var(--hue));
+  /* Text colors - inverted for light mode */
+  --color-text-muted: light-dark(
+    oklch(0.5 var(--chroma-grayscale) var(--hue)),
+    oklch(0.6 var(--chroma-grayscale) var(--hue))
+  );
+  --color-text-secondary: light-dark(
+    oklch(0.4 var(--chroma-grayscale) var(--hue)),
+    oklch(0.7 var(--chroma-grayscale) var(--hue))
+  );
+  --color-text-primary: light-dark(
+    oklch(0.25 var(--chroma-grayscale) var(--hue)),
+    oklch(0.8 var(--chroma-grayscale) var(--hue))
+  );
+  --color-text-bright: light-dark(
+    oklch(0.1 var(--chroma-grayscale) var(--hue)),
+    oklch(0.95 var(--chroma-grayscale) var(--hue))
+  );
 
-  /* Accent colors */
-  --color-accent-start: oklch(0.5 var(--chroma-accent) var(--hue));
-  --color-accent-mid: oklch(0.55 var(--chroma-accent) var(--hue));
-  --color-accent-end: oklch(0.6 var(--chroma-accent) var(--hue));
+  /* Accent colors - slightly adjusted for light mode */
+  --color-accent-start: light-dark(
+    oklch(0.55 var(--chroma-accent) var(--hue)),
+    oklch(0.5 var(--chroma-accent) var(--hue))
+  );
+  --color-accent-mid: light-dark(
+    oklch(0.6 var(--chroma-accent) var(--hue)),
+    oklch(0.55 var(--chroma-accent) var(--hue))
+  );
+  --color-accent-end: light-dark(
+    oklch(0.65 var(--chroma-accent) var(--hue)),
+    oklch(0.6 var(--chroma-accent) var(--hue))
+  );
 
   /* Gradient accent colors */
-  --color-gradient-text-start: oklch(0.7 var(--chroma-gradient) var(--hue));
-  --color-gradient-text-end: oklch(0.8 var(--chroma-gradient) var(--hue));
-  --color-gradient-header-start: oklch(0.1 0.05 var(--hue));
-  --color-gradient-header-end: oklch(0.2 0.05 var(--hue));
+  --color-gradient-text-start: light-dark(
+    oklch(0.4 var(--chroma-gradient) var(--hue)),
+    oklch(0.7 var(--chroma-gradient) var(--hue))
+  );
+  --color-gradient-text-end: light-dark(
+    oklch(0.3 var(--chroma-gradient) var(--hue)),
+    oklch(0.8 var(--chroma-gradient) var(--hue))
+  );
+  --color-gradient-header-start: light-dark(
+    oklch(0.88 0.05 var(--hue)),
+    oklch(0.1 0.05 var(--hue))
+  );
+  --color-gradient-header-end: light-dark(
+    oklch(0.82 0.05 var(--hue)),
+    oklch(0.2 0.05 var(--hue))
+  );
 
   /* Slider gradient default */
   --slider-gradient: linear-gradient(to right, var(--color-border-base), var(--color-text-bright));
@@ -67,6 +130,7 @@ body {
 
 /* App Header */
 .app-header {
+  position: relative;
   text-align: center;
   padding: 2rem 1rem;
   background: linear-gradient(
@@ -100,6 +164,50 @@ body {
   font-size: 1rem;
   color: var(--color-text-secondary);
   font-weight: 500;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  background: var(--color-bg-darker);
+  padding: 0.375rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-base);
+  box-shadow: var(--shadow-base);
+}
+
+.theme-button {
+  all: unset;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 200ms ease-in-out;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.theme-button:hover {
+  background: var(--color-bg-dark);
+  transform: scale(1.05);
+}
+
+.theme-button[data-active='true'] {
+  background: var(--color-accent-start);
+  border-color: var(--color-accent-mid);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-button:active {
+  transform: scale(0.95);
 }
 
 /* Controls Section */
@@ -359,14 +467,18 @@ body {
 }
 
 .swatch-info {
+  color-scheme: dark;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
   color: var(--color-text-bright);
-  padding: 0.5rem;
   width: 100%;
   font-size: 0.7rem;
+  padding-block: 0.5rem;
   opacity: 0;
   transition: opacity 300ms ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .swatch:hover .swatch-info {
@@ -374,15 +486,12 @@ body {
 }
 
 .swatch-label {
-  font-weight: bold;
-  margin-bottom: 0.15rem;
-  font-size: 0.75rem;
   display: none;
 }
 
 .swatch-value {
   font-size: 0.65rem;
-  font-weight: 700;
+  font-weight: bold;
   opacity: 0.9;
 }
 
