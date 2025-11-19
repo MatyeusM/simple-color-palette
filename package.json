@@ -10,9 +10,32 @@
     "eslint": "eslint .",
     "prettier": "prettier --check ."
   },
-  "keywords": [],
+  "keywords": [
+    "color",
+    "palette",
+    "oklch",
+    "hsl",
+    "rgb",
+    "color-scheme",
+    "color-harmony",
+    "design",
+    "generator",
+    "complementary",
+    "triadic",
+    "analogous",
+    "p3",
+    "rec2020"
+  ],
   "author": "MatyeusM (https://github.com/MatyeusM)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatyeusM/simple-color-palette.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MatyeusM/simple-color-palette/issues"
+  },
+  "homepage": "https://matyeusm.github.io/simple-color-palette/",
   "packageManager": "pnpm@10.20.0",
   "dependencies": {
     "colorjs.io": "^0.5.2"
