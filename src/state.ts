@@ -56,7 +56,7 @@ class StateManager {
 
     // Load theme preference from local storage or default to 'system'
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemePreference | null
-    const themePreference: ThemePreference = 
+    const themePreference: ThemePreference =
       savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system'
         ? savedTheme
         : 'system'
@@ -129,14 +129,7 @@ class StateManager {
 
   private applyTheme() {
     const { themePreference } = this.state
-    
-    if (themePreference === 'system') {
-      // Remove the color-scheme override to let the browser use system preference
-      document.documentElement.style.colorScheme = ''
-    } else {
-      // Set explicit color-scheme
-      document.documentElement.style.colorScheme = themePreference
-    }
+    document.documentElement.style.colorScheme = themePreference === 'system' ? '' : themePreference
   }
 
   private generatePalette() {
