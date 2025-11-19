@@ -14,10 +14,7 @@
   --radius-lg: 1rem;
 
   /* Shadows - lighter in light mode, darker in dark mode */
-  --shadow-base: light-dark(
-    0 4px 20px rgba(0, 0, 0, 0.1),
-    0 4px 20px rgba(0, 0, 0, 0.3)
-  );
+  --shadow-base: light-dark(0 4px 20px rgba(0, 0, 0, 0.1), 0 4px 20px rgba(0, 0, 0, 0.3));
   --shadow-inset: light-dark(
     inset 0 2px 4px rgba(0, 0, 0, 0.08),
     inset 0 2px 4px rgba(0, 0, 0, 0.3)
@@ -100,10 +97,7 @@
     oklch(0.88 0.05 var(--hue)),
     oklch(0.1 0.05 var(--hue))
   );
-  --color-gradient-header-end: light-dark(
-    oklch(0.82 0.05 var(--hue)),
-    oklch(0.2 0.05 var(--hue))
-  );
+  --color-gradient-header-end: light-dark(oklch(0.82 0.05 var(--hue)), oklch(0.2 0.05 var(--hue)));
 
   /* Slider gradient default */
   --slider-gradient: linear-gradient(to right, var(--color-border-base), var(--color-text-bright));

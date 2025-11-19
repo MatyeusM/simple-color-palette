@@ -2,7 +2,7 @@ import { state } from '../state'
 import type { ThemePreference } from '../types'
 
 export function initThemeToggle() {
-  const container = document.getElementById('themeToggle')
+  const container = document.querySelector('#themeToggle')
   if (!container) return
 
   // Create the theme toggle UI
@@ -36,16 +36,16 @@ export function initThemeToggle() {
 
     // Add click handlers
     const buttons = container.querySelectorAll('.theme-button')
-    buttons.forEach((button) => {
+    for (const button of buttons) {
       button.addEventListener('click', () => {
         const theme = (button as HTMLElement).dataset.theme as ThemePreference
         state.setThemePreference(theme)
       })
-    })
+    }
   }
 
   // Subscribe to state changes
-  state.subscribe((appState) => {
+  state.subscribe(appState => {
     render(appState.themePreference)
   })
 }
