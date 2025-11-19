@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <title>Simple Color Palette - OKLCH Color Palette Generator</title>
+    <meta name="description" content="Generate beautiful color palettes with OKLCH, HSL, or RGB. Create complementary, triadic, and analogous color schemes. Export palettes as JSON or Markdown. Perfect for developers and designers." />
+    <meta name="keywords" content="color palette generator, OKLCH color, color harmony, complementary colors, triadic colors, analogous colors, color scheme generator, palette tool, hex color, RGB, HSL, color picker, design tool, developer tool, color export, JSON palette, markdown palette, wide gamut colors, P3 colors, rec2020, color theory" />
+    <meta name="author" content="MatyeusM" />
+    <meta name="theme-color" content="#0a1a1f" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://matyeusm.github.io/simple-color-palette/" />
+    <meta property="og:title" content="Simple Color Palette - OKLCH Color Palette Generator" />
+    <meta property="og:description" content="Generate beautiful color palettes with OKLCH, HSL, or RGB. Create complementary, triadic, and analogous color schemes instantly." />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://matyeusm.github.io/simple-color-palette/" />
+    <meta property="twitter:title" content="Simple Color Palette - OKLCH Color Palette Generator" />
+    <meta property="twitter:description" content="Generate beautiful color palettes with OKLCH, HSL, or RGB. Create complementary, triadic, and analogous color schemes instantly." />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://matyeusm.github.io/simple-color-palette/" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+
+  <body>
+    <main id="app" role="main" aria-label="Color Palette Generator">
+      <header class="app-header" role="banner">
+        <h1>Simple Color Palette</h1>
+        <p class="subtitle">Generate beautiful color palettes with OKLCH, HSL, or RGB</p>
+      </header>
+
+      <section class="controls" aria-labelledby="base-color-heading">
+        <div class="color-picker-header">
+          <h3 id="base-color-heading">Base Color</h3>
+          <div class="color-mode-selector" role="radiogroup" aria-label="Color mode selection">
+            <label>
+              <input type="radio" name="colorMode" value="oklch" checked aria-label="OKLCH color mode" />
+              <span>OKLCH</span>
+            </label>
+            <label>
+              <input type="radio" name="colorMode" value="hsl" aria-label="HSL color mode" />
+              <span>HSL</span>
+            </label>
+            <label>
+              <input type="radio" name="colorMode" value="rgb" aria-label="RGB color mode" />
+              <span>RGB</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sliders-container" role="group" aria-label="Color channel sliders">
+          <div class="slider-group">
+            <div class="slider-label">
+              <span id="channel0Label">L</span>
+              <span id="channel0Value">0.70</span>
+            </div>
+            <input
+              type="range"
+              id="channel0"
+              class="color-slider"
+              aria-label="Lightness channel"
+              aria-valuemin="0"
+              aria-valuemax="1"
+              aria-valuenow="0.70"
+            />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span id="channel1Label">C</span>
+              <span id="channel1Value">0.14</span>
+            </div>
+            <input
+              type="range"
+              id="channel1"
+              class="color-slider"
+              aria-label="Chroma channel"
+              aria-valuemin="0"
+              aria-valuemax="0.4"
+              aria-valuenow="0.14"
+            />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span id="channel2Label">H</span>
+              <span id="channel2Value">190</span>
+            </div>
+            <input
+              type="range"
+              id="channel2"
+              class="color-slider"
+              aria-label="Hue channel"
+              aria-valuemin="0"
+              aria-valuemax="360"
+              aria-valuenow="190"
+            />
+          </div>
+        </div>
+
+        <div class="color-display">
+          <div class="color-display-label">Base Color</div>
+          <div class="color-display-preview">
+            <div id="colorSwatch" class="color-swatch-preview"></div>
+            <div id="colorValue" class="color-value-text">oklch(0.70 0.14 190)</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="preview" class="preview" role="region" aria-label="Generated color palettes">
+        <!-- Generated color swatches will go here -->
+      </section>
+
+      <aside class="export" role="region" aria-labelledby="export-heading">
+        <h3 id="export-heading">Export Settings</h3>
+        <div class="export-group">
+          <label for="outputSpace">Output Color Space</label>
+          <select id="outputSpace" aria-label="Select output color space">
+            <option value="srgb">sRGB</option>
+            <option value="p3">Display P3</option>
+            <option value="rec2020">Rec.2020</option>
+          </select>
+        </div>
+
+        <div class="export-group">
+          <label for="exportFormat">Export Format</label>
+          <select id="exportFormat" aria-label="Select export format">
+            <option value="json">JSON</option>
+            <option value="markdown">Markdown</option>
+          </select>
+        </div>
+
+        <button id="exportButton" aria-label="Export color palette in selected format">Export</button>
+      </aside>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
