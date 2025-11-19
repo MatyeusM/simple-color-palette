@@ -12,7 +12,7 @@ export class ColorPicker {
   private colorValue: HTMLElement
   private currentMode: ColorMode = 'oklch'
   private isUpdating = false
-  private debounceTimer: number | null = null
+  private debounceTimer: number | undefined = undefined
 
   private modeConfigs: Record<ColorMode, ColorModeConfig> = {
     oklch: {
@@ -124,12 +124,12 @@ export class ColorPicker {
         // Try to parse the pasted text as a color
         const color = new Color(pastedText.trim())
         const oklchColor = color.to('oklch')
-        
+
         // If successful, update the base color
         this.isUpdating = true
         state.setBaseColor(oklchColor)
         this.isUpdating = false
-        
+
         // Show brief visual feedback
         this.colorSwatch.style.outline = '3px solid var(--color-accent-start)'
         setTimeout(() => {
@@ -179,7 +179,7 @@ export class ColorPicker {
       clearTimeout(this.debounceTimer)
     }
 
-    this.debounceTimer = window.setTimeout(() => {
+    this.debounceTimer = globalThis.setTimeout(() => {
       // Convert to color and update state
       try {
         const color = config.getColor(values)

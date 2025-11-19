@@ -46,22 +46,28 @@ export class Preview {
         swatch.className = 'swatch'
         swatch.style.backgroundColor = paletteColor.hex
         swatch.setAttribute('role', 'button')
-        swatch.setAttribute('aria-label', `${paletteColor.label}: ${paletteColor.hex}. Click to copy.`)
+        swatch.setAttribute(
+          'aria-label',
+          `${paletteColor.label}: ${paletteColor.hex}. Click to copy.`,
+        )
         swatch.setAttribute('tabindex', '0')
 
         // Add click to copy functionality
         const copyToClipboard = () => {
-          navigator.clipboard.writeText(paletteColor.hex).then(() => {
-            // Visual feedback
-            swatch.classList.add('copied')
-            setTimeout(() => swatch.classList.remove('copied'), 300)
-          }).catch(error => {
-            console.error('Failed to copy:', error)
-          })
+          navigator.clipboard
+            .writeText(paletteColor.hex)
+            .then(() => {
+              // Visual feedback
+              swatch.classList.add('copied')
+              setTimeout(() => swatch.classList.remove('copied'), 300)
+            })
+            .catch(error => {
+              console.error('Failed to copy:', error)
+            })
         }
 
         swatch.addEventListener('click', copyToClipboard)
-        swatch.addEventListener('keydown', (event) => {
+        swatch.addEventListener('keydown', event => {
           if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault()
             copyToClipboard()
